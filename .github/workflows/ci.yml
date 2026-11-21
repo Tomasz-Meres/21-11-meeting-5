@@ -56,7 +56,14 @@ jobs:
         with:
           name: ${{matrix.service}}-api-docs
           path: services/${{matrix.service}}/apidocs
-
+  build_images:
+    runs-in: ubuntu-latest
+    strategy:
+      matrix:
+        services: [tasks-api, title-normalizer]
+    steps:
+      - uses: actions/checkout@v7
+      - run: docker build -t ${{matrix.service}} services/${{matrix.service}}
   deploy:
     needs: [run_tests, generate_api_docs]
     if: github.event.pull_request.merged == true
