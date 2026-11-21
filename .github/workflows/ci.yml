@@ -57,7 +57,7 @@ jobs:
           name: ${{matrix.service}}-api-docs
           path: services/${{matrix.service}}/apidocs
   build_images:
-    runs-in: ubuntu-latest
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         services: [tasks-api, title-normalizer]
